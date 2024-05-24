@@ -50,15 +50,15 @@ This is a Dockerized ToDoList application with authentication built using Node.j
 
 ### Authentication Routes
 
-- POST /api/auth/register: Register a new user.
-- POST /api/auth/login: Log in an existing user.
+- POST /auth/register: Register a new user.
+- POST /auth/login: Log in an existing user.
 
 ### ToDo Routes
 
-- GET /api/todos: Fetch all ToDo items with pagination and filtering options.
-- POST /api/todos: Create a new ToDo item.
-- PUT /api/todos/:id: Update a ToDo item.
-- DELETE /api/todos/:id: Delete a ToDo item.
+- GET /todos: Fetch all ToDo items with pagination and filtering options.
+- POST /todos: Create a new ToDo item.
+- PUT /todos/:id: Update a ToDo item.
+- DELETE /todos/:id: Delete a ToDo item.
 
 ### Usage
 
