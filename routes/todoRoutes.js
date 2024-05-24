@@ -42,9 +42,44 @@ router.post("/", async (req, res, next) => {
 // Get all todo items
 router.get("/", async (req, res, next) => {
   try {
-    const todos = await Todo.find({
+    // Extracting url parameters
+    const urlParts = req.url.split("?");
+    const queryParams = {};
+    if (urlParts.length > 1) {
+      const queryString = urlParts[1];
+      const params = queryString.split("&");
+      params.forEach((param) => {
+        const keyValue = param.split("=");
+        queryParams[keyValue[0]] = keyValue[1];
+      });
+    }
+
+    let limit,
+      skip = 0;
+    if (
+      queryParams.hasOwnProperty("page") &&
+      queryParams.hasOwnProperty("limit")
+    ) {
+      const page = parseInt(req.query.page) || 1;
+      limit = parseInt(req.query.limit) || 10;
+      skip = (page - 1) * limit;
+    }
+
+    // Filtering options
+    const filter = {};
+    if (queryParams.hasOwnProperty("status")) {
+      filter.completed = req.query.status;
+    }
+
+    let query = Todo.find({
       userId: req.userData.userId || req.body.userId,
-    });
+      ...filter,
+    }).skip(skip);
+
+    if (limit) query.limit(limit);
+
+    const todos = await query.exec();
+
     res.status(200).json(todos);
   } catch (err) {
     next(err);
