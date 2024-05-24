@@ -62,7 +62,7 @@ This is a Dockerized ToDoList application with authentication built using Node.j
 
 ### Usage
 
-1. Register a new user by sending a POST request to `/api/auth/register` with a JSON body containing `username` and `password`.
-2. Log in with the registered user credentials by sending a POST request to `/api/auth/login` with the same JSON body.
+1. Register a new user by sending a POST request to `/auth/register` with a JSON body containing `username` and `password`.
+2. Log in with the registered user credentials by sending a POST request to `/auth/login` with the same JSON body.
 3. Use the provided JWT token in the response to authenticate subsequent requests.
 4. Perform CRUD operations on ToDo items using the authenticated endpoints.
